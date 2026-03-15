@@ -1,58 +1,45 @@
-﻿using System;
+﻿DoorMachine.main();
 
-KodePos kodePos = new KodePos();
-int batununggal = kodePos.getKodePos("Batununggal");
-int wates = kodePos.getKodePos("Wates");
-Console.WriteLine("Kode Pos Batununggal: " + batununggal);
-Console.WriteLine("Kode Pos Wates: " + wates);
-
-public class KodePos
+public class DoorMachine
 {
-    public int getKodePos(string kelurahan)
+    enum State { Terkunci, Terbuka }
+
+    public static void main()
     {
-        if(kelurahan == "Batununggal")
+        State state = State.Terkunci;
+
+        while (true)
         {
-            return 40266;
-        }
-        else if(kelurahan == "Kujangsari")
-        {
-            return 40287;
-        }
-        else if(kelurahan == "Mengger")
-        {
-            return 40267;
-        }
-        else if(kelurahan == "Wates")
-        {
-            return 40256;
-        }
-        else if(kelurahan == "Cijaura")
-        {
-            return 40287;
-        }
-        else if(kelurahan == "Jatisari")
-        {
-            return 40286;
-        }
-        else if (kelurahan == "Margasari")
-        {
-            return 40286;
-        }
-        else if (kelurahan == "Sekejati")
-        {
-            return 40286;
-        }
-        else if (kelurahan == "Kebonwaru")
-        {
-            return 40272;
-        }
-        else if (kelurahan == "Maleer")
-        {
-            return 40274;
-        }
-        else
-        {
-            return 0;
+            if (state == State.Terkunci)
+            {
+                Console.WriteLine("Pintu Terkunci");
+                state = State.Terbuka;
+
+            }
+            else if (state == State.Terbuka)
+            {
+                Console.WriteLine("Pintu tidak Terkunci");
+                state = State.Terkunci;
+            }
+
+            Console.WriteLine("Plilih state: ");
+            string input = Console.ReadLine();
+
+            switch (state)
+            {
+                case State.Terkunci:
+                    if (input == "buka")
+                    {
+                        state = State.Terbuka;
+                    }
+                    break;
+                case State.Terbuka:
+                    if (input == "kunci")
+                    {
+                        state = State.Terkunci;
+                    }
+                    break;
+            }
         }
     }
 }
